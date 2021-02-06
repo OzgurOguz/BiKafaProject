@@ -55,6 +55,7 @@ namespace BiKafaProject.API.Controllers
             return Created(String.Empty, usermodel);
         }
 
+
         [ValidationFilter]
         [HttpPut]
         public async Task<IActionResult> UpdateData([FromBody] UserModel usermodel)
