@@ -1,7 +1,6 @@
 ﻿using BiKafaProject.Core.Filters;
 using BiKafaProject.Core.Interfaces;
 using BiKafaProject.Core.Models;
-using BiKafaProject.Core.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -22,8 +21,7 @@ namespace BiKafaProject.API.Controllers
             _userOperationsRepository = userOperationsRepository;
         }
 
-        [ServiceFilter(typeof(NotFoundFilter))]
-        [HttpGet("{id}")]
+        
         public Task<IActionResult> GetData(string id)
         {
             if (id == null)
@@ -41,6 +39,8 @@ namespace BiKafaProject.API.Controllers
             return Ok(data);
         }
 
+        [ServiceFilter(typeof(NotFoundFilter))]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetPersonInfoById(string id)
         {
             var data = await _userOperationsRepository.GetAsync(id);
@@ -64,8 +64,7 @@ namespace BiKafaProject.API.Controllers
             return Accepted(usermodel);
         }
 
-        [ServiceFilter(typeof(NotFoundFilter))]
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public Task<IActionResult> DeleteData(string id)
         {
             if (id == null)
@@ -79,6 +78,8 @@ namespace BiKafaProject.API.Controllers
             return Ok();
         }
 
+        [ServiceFilter(typeof(NotFoundFilter))]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveDataById(string id)
         {
             await _userOperationsRepository.DeleteAsync(id);

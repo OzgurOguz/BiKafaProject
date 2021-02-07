@@ -1,11 +1,14 @@
 using BiKafaProject.Core.Filters;
 using BiKafaProject.Core.Interfaces;
 using BiKafaProject.Core.Models.DbModels;
-using BiKafaProject.Core.Repositories;
+using BiKafaProject.Service.Extensions;
+using BiKafaProject.Service.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -49,6 +52,7 @@ namespace BiKafaProject.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHeaderControlMiddleware();
 
             app.UseRouting();
 
@@ -58,6 +62,26 @@ namespace BiKafaProject.API
             {
                 endpoints.MapControllers();
             });
-        }
+
+     
+
+                //});
+                //app.Use(async (context, next) =>
+                //     {
+
+                //        //.GetEndpoint()s
+                //        //.Metadata
+                //        //.GetMetadata<ControllerActionDescriptor>();
+                //        //if (context.Request.Method == "POST" && context.GetEndpoint().Metadata.GetMetadata<ControllerActionDescriptor>().ControllerName == "SaveData")
+                //        // {
+                //            //context.Response.WriteAsync("aa");
+                //             context.Response.Headers.Add("deneme", "aa");
+                //         next();
+                //         //}
+                //         //throw new Exception();
+
+
+                //     });
+            }
     }
 }

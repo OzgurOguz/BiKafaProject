@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BiKafaProject.Core.Repositories
+namespace BiKafaProject.Service.Repositories
 {
     public class UserOperationsRepository : IUserOperationsRepository
     {

@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BiKafaProject.Core\BiKafaProject.Core.csproj" />
+    <ProjectReference Include="..\BiKafaProject.Service\BiKafaProject.Service.csproj" />
   </ItemGroup>
 
 

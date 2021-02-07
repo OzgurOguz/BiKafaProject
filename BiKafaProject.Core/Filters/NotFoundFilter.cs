@@ -28,7 +28,22 @@ namespace BiKafaProject.Core.Filters
             {
                 id = (string)context.ActionArguments.Values.FirstOrDefault();
 
-                user = await _userModel.GetAsync(id);
+                try
+                {
+                    user = await _userModel.GetAsync(id);
+
+                }
+                catch (Exception)
+                {
+
+                    ErrorDto errorDto = new ErrorDto();
+
+                    errorDto.status = 404;
+
+                    errorDto.Errors.Add($"id'si {id} olan data veri tabanında bulunamadı");
+
+                    context.Result = new NotFoundObjectResult(errorDto);
+                }
             }
 
 
@@ -36,10 +51,14 @@ namespace BiKafaProject.Core.Filters
             {
                 await next();
             }
-            if (id != null && user.Count() > 0 )
+            if (id != null && user != null )
             {
                 await next();
             }
+            //if (id != null && user.Count() > 0)
+            //{
+            //    await next();
+            //}
             else
             {
                 ErrorDto errorDto = new ErrorDto();
